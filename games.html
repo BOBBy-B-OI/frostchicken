@@ -1,10 +1,7 @@
 <title>Frost Chicken | Games</title>
 <h1>Games</h1>
 
-<div class="gameGrid" id="gameGrid">
-<a data-testid="app_icon_capybara-clicker" href="Games\capybara-clicker.html" id="326" class="app-icon-card col-span-1 row-span-1"><div class="app-icon-container"><div class="app-icon-image-wrapper"><img loading="lazy" src="https://play-lh.googleusercontent.com/qPhicF9zFY_Ya0xQm9RsTcCIKnjTb2gW5lAvzow6WgiodIOBMKyeAHaS4bh2WZN9BCU" alt="capybara-clicker" class="app-icon-image"></div><div class="app-icon-overlay"></div></div></a>
-<a data-testid="app_icon_1v1lol" href="Games\1v1lol.html" id="326" class="app-icon-card col-span-1 row-span-1"><div class="app-icon-container"><div class="app-icon-image-wrapper"><img loading="lazy" src="https://raw.githubusercontent.com/duckmath/icons/refs/heads/main/1v1.lol-old.webp" alt="capybara-clicker" class="app-icon-image"></div><div class="app-icon-overlay"></div></div></a>
-</div>
+<div class="gameGrid" id="gameGrid"></div>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
@@ -94,9 +91,46 @@ button {
 </style>
 <body>
     <script>
-        function openGame(gameName) {
-            if (gameName === 'capybara-clicker') {
-                window.location.href = 'Games/capybara-clicker/index.html';
+        // Define games as a list - add new games here
+        const games = [
+            {
+                id: 'capybara-clicker',
+                name: 'Capybara Clicker',
+                icon: 'https://play-lh.googleusercontent.com/qPhicF9zFY_Ya0xQm9RsTcCIKnjTb2gW5lAvzow6WgiodIOBMKyeAHaS4bh2WZN9BCU',
+                href: 'Games/capybara-clicker.html'
+            },
+            {
+                id: '1v1lol',
+                name: '1v1.lol',
+                icon: 'https://raw.githubusercontent.com/duckmath/icons/refs/heads/main/1v1.lol-old.webp',
+                href: 'Games/1v1lol.html'
             }
+            // Add more games here in the same format
+        ];
+
+        // Generate game buttons on page load
+        function generateGames() {
+            const gameGrid = document.getElementById('gameGrid');
+            games.forEach(game => {
+                const link = document.createElement('a');
+                link.href = game.href;
+                link.className = 'app-icon-card';
+                link.setAttribute('data-testid', `app_icon_${game.id}`);
+                
+                link.innerHTML = `
+                    <div class="app-icon-container">
+                        <div class="app-icon-image-wrapper">
+                            <img loading="lazy" src="${game.icon}" alt="${game.name}" class="app-icon-image">
+                        </div>
+                        <div class="app-icon-overlay"></div>
+                    </div>
+                `;
+                
+                gameGrid.appendChild(link);
+            });
         }
+
+        // Generate games when the page loads
+        document.addEventListener('DOMContentLoaded', generateGames);
     </script>
+</body>
