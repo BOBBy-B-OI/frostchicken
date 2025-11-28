@@ -115,36 +115,43 @@ button {
                 id: '1v1lol',
                 name: '1v1.lol',
                 icon: 'https://raw.githubusercontent.com/duckmath/icons/refs/heads/main/1v1.lol-old.webp',
+                url: 'https://db.duckmath.org/html/1v1lol/index.html'
             },
             {
                 id: 'capybara-clicker',
                 name: 'Capybara Clicker',
                 icon: 'https://play-lh.googleusercontent.com/qPhicF9zFY_Ya0xQm9RsTcCIKnjTb2gW5lAvzow6WgiodIOBMKyeAHaS4bh2WZN9BCU',
+                url: 'https://db.duckmath.org/html/capybara-clicker/index.html'
             },
             {
                 id: 'stickman-hook',
                 name: 'Stickman Hook',
                 icon: 'https://raw.githubusercontent.com/duckmath/icons/refs/heads/main/stickmanhook.webp',
+                url: 'https://db.duckmath.org/html/stickman-hook/index.html'
             },
             {
                 id: 'minecraft',
                 name: 'Minecraft',
                 icon: 'https://images.icon-icons.com/2699/PNG/512/minecraft_logo_icon_168974.png',
+                url: 'https://db.duckmath.org/html/minecraft/index.html'
             },
             {
                 id: 'ragdoll-archers',
                 name: 'Ragdoll Archers',
                 icon: 'https://play-lh.googleusercontent.com/XMiWEMPbuq13oVcwYQ6ySLtZnBf7WpJ3rb7v-TM4MdFOvWfo1Z2hzSEAApRXzEcshjY',
+                url: 'https://db.duckmath.org/html/ragdoll-archers/index.html'
             },
             {
                 id: 'rodeo-stampede',
                 name: 'Rodeo Stampede',
                 icon: 'https://raw.githubusercontent.com/duckmath/icons/refs/heads/main/rodeo-stampede.webp',
+                url: 'https://db.duckmath.org/html/rodeo-stampede/index.html'
             },
             {
                 id: 'race-survival-arena-king',
                 name: 'Race Survival Arena King',
                 icon: 'https://drift-hunters.io/data/image/game/race-survival-arena-king.png',
+                url: 'https://db.duckmath.org/html/race_survival_arena_king/index.html'
             },
         ];
 
@@ -152,7 +159,7 @@ button {
             const gameGrid = document.getElementById('gameGrid');
             games.forEach(game => {
                 const link = document.createElement('a');
-                link.href = "/Games/" + game.id + ".html";
+                link.href = "gamePlayer.html?url=" + encodeURIComponent(game.url);
                 link.className = 'app-icon-card';
                 link.setAttribute('data-testid', `app_icon_${game.id}`);
                 
