@@ -76,29 +76,7 @@
         body.fc-season-spring { background: linear-gradient(180deg, #c5f6ffff, #defaffff) !important; }
         body.fc-season-summer { background: linear-gradient(180deg, #e8fffdff, #FFF7E0) !important; }
         body.fc-season-autumn { background: linear-gradient(180deg, #fffde6ff, #FFE6D1) !important; }
-        .season-picker {
-            position: fixed;
-            left: 12px;
-            bottom: 12px;
-            z-index: 99999;
-            background: rgba(255,255,255,0.9);
-            border-radius: 8px;
-            padding: 6px 8px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-            font-family: sans-serif;
-            display: flex;
-            gap: 6px;
-            align-items: center;
-        }
-        .season-btn {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            padding: 6px 8px;
-            border-radius: 6px;
-        }
-        .season-btn.active { background: rgba(0,0,0,0.08); }
+        /* picker UI removed - seasons are controlled via code */
         `;
         const s = document.createElement('style');
         s.setAttribute('data-generated','seasons');
@@ -126,7 +104,6 @@
         localStorage.setItem('fc_active_season', activeSeason);
         intervalId = setInterval(()=>createItem(cfg), cfg.freq);
         for(let i=0;i<6;i++) setTimeout(()=>createItem(cfg), i*150);
-        updatePickerActive();
         applyBodySeasonClass(activeSeason);
     }
 
@@ -147,41 +124,10 @@
         setTimeout(()=>{ try{ el.remove(); }catch(e){} }, duration*1000 + 200);
     }
 
-    function createPicker(){
-        if(document.querySelector('.season-picker')) return;
-        const picker = document.createElement('div');
-        picker.className = 'season-picker';
-        Object.values(SEASONS).forEach(s=>{
-            const btn = document.createElement('button');
-            btn.className = 'season-btn';
-            btn.title = s.label;
-            btn.innerHTML = s.char;
-            btn.dataset.season = s.id;
-            btn.addEventListener('click', ()=> startSeason(s.id));
-            picker.appendChild(btn);
-        });
-        const label = document.createElement('div');
-        label.style.fontSize = '12px';
-        label.style.opacity = '0.9';
-        label.style.marginLeft = '6px';
-        label.textContent = 'Season';
-        picker.appendChild(label);
-        document.body.appendChild(picker);
-        updatePickerActive();
-    }
-
-    function updatePickerActive(){
-        const btns = document.querySelectorAll('.season-btn');
-        btns.forEach(b=>{
-            b.classList.toggle('active', b.dataset.season === activeSeason);
-        });
-    }
+    // picker functions removed - control seasons with FrostChickenSeasons.setSeason(name)
 
     function init(){
         injectStyles();
-        const page = location.pathname.split('/').pop().toLowerCase();
-        const isIndex = page === '' || page === 'index.html' || page.includes('index');
-        if(isIndex) createPicker();
         startSeason(activeSeason);
         applyBodySeasonClass(activeSeason);
         window.addEventListener('resize', ()=>{});
@@ -190,10 +136,14 @@
     function applyBodySeasonClass(name){
         document.body.classList.remove('fc-season-winter','fc-season-spring','fc-season-summer','fc-season-autumn');
         document.body.classList.add('fc-season-'+name);
+        console.log('Applied class fc-season-'+name, 'Body now has:', document.body.className);
     }
 
     window.FrostChickenSeasons = {
-        setSeason: startSeason,
+        setSeason: function(name){
+            startSeason(name);
+            setTimeout(()=>applyBodySeasonClass(name), 5);
+        },
         getSeason: ()=> activeSeason,
         stop: stopSeason
     };
