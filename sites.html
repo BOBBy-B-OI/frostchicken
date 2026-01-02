@@ -1,4 +1,5 @@
 <link rel="icon" type="image/png" sizes="500x500" href="https://images.emojiterra.com/google/android-11/512px/1f414.png">
+<script src="siteSettings.js"></script>
 <title>Frost Chicken | Sites</title>
 <h1>Sites</h1>
 <button onclick="openDuckmath()">Open Duckmath (In this tab)</button>
@@ -102,7 +103,6 @@ iframe {
         <path d="M3 13h2v8h4v-6h4v6h4v-8h2L12 5 3 13z"/>
     </svg>
 </button>
-<button class="about-blank-btn" onclick="openPageInBlankTab()">Open in about:blank</button>
 <script src="snowflake.js"></script>
         <body>
             <iframe id="frame" class="frame" src="" allowfullscreen></iframe>
@@ -130,11 +130,3 @@ iframe {
                 }
 
             </script>
-            <script>
-        function openPageInBlankTab() {
-            var win=window.open("about:blank","_blank");
-            if(!win)return;
-            win.document.write(document.documentElement.outerHTML);
-            win.document.close();
-        }
-    </script>

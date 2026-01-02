@@ -1,6 +1,7 @@
 ﻿<html>
 <head>
     <link rel="icon" type="image/png" sizes="500x500" href="https://images.emojiterra.com/google/android-11/512px/1f414.png">
+    <script src="siteSettings.js"></script>
     <title>Frost Chicken | Settings</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
@@ -78,8 +79,108 @@
         </svg>
     </button>
     <h1>Settings</h1>
-    <p>Idk what to put here</p>
+
+    <div style="margin-top:20px; text-align:left; display:inline-block; width:80%; max-width:720px;">
+      <label for="siteTitleInput" style="font-weight:700;display:block;margin-bottom:8px;">Tab title</label>
+      <input id="siteTitleInput" type="text" placeholder="Enter tab title" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+      <div style="height:12px;"></div>
+      <label for="siteLogoInput" style="font-weight:700;display:block;margin-bottom:8px;">Favicon URL</label>
+      <input id="siteLogoInput" type="url" placeholder="https://example.com/favicon.png" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+      <div style="margin-top:12px;">
+        <button onclick="saveSiteSettings()">Save Tab Cloak</button>
+        <button onclick="resetSiteSettings()" style="background:#fff;border:1px solid #ccc;padding:12px 24px;">Reset Tab Cloak</button>
+      </div>
+      <div id="settingsMsg" style="margin-top:10px;color:green;font-weight:600;"></div>
+      <div style="margin-top:12px; text-align:center;">
+        <button onclick="openPageInBlankTab()">Open in about:blank</button>
+      </div>
+    </div>
 
     <script src="snowflake.js"></script>
+
+    <script>
+        function openPageInBlankTab() {
+        const newTab = window.open('about:blank', '_blank');
+        if (newTab) {
+          const title = localStorage.getItem('siteTitle') || document.title || 'Frost Chicken';
+          const logo = localStorage.getItem('siteLogo') || (document.querySelector("link[rel~='icon']") ? document.querySelector("link[rel~='icon']").href : 'https://images.emojiterra.com/google/android-11/512px/1f414.png');
+          newTab.document.title = title;
+          const favicon = newTab.document.createElement('link');
+          favicon.rel = 'icon';
+          favicon.href = logo;
+          newTab.document.head.appendChild(favicon);
+          const iframe = newTab.document.createElement('iframe');
+          iframe.src = "/index.html";
+          iframe.style.width = '100vw';
+          iframe.style.height = '100vh';
+          iframe.style.border = 'none';
+          newTab.document.body.style.margin = '0';
+          newTab.document.body.appendChild(iframe);
+        } else {
+          alert("Failed to open About:Blank page.");
+        }
+      }
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const DEFAULT_TITLE = 'Frost Chicken';
+        const DEFAULT_FAVICON = 'https://images.emojiterra.com/google/android-11/512px/1f414.png';
+        const titleInput = document.getElementById('siteTitleInput');
+        const logoInput = document.getElementById('siteLogoInput');
+        const msg = document.getElementById('settingsMsg');
+
+        const title = localStorage.getItem('siteTitle') || DEFAULT_TITLE;
+        const logo = localStorage.getItem('siteLogo') || DEFAULT_FAVICON;
+        titleInput.value = title;
+        logoInput.value = logo;
+
+        document.title = title;
+        {
+          let l = document.querySelector("link[rel~='icon']");
+          if (!l) { l = document.createElement('link'); l.rel = 'icon'; document.head.appendChild(l); }
+          l.href = logo;
+        }
+
+        [titleInput, logoInput].forEach(inp => {
+          inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') saveSiteSettings(); });
+        });
+      });
+
+      function saveSiteSettings() {
+        const title = document.getElementById('siteTitleInput').value.trim();
+        const logo = document.getElementById('siteLogoInput').value.trim();
+        if (title) localStorage.setItem('siteTitle', title); else localStorage.removeItem('siteTitle');
+        if (logo) localStorage.setItem('siteLogo', logo); else localStorage.removeItem('siteLogo');
+
+        if (title) document.title = title; else document.title = 'Frost Chicken | Settings';
+        if (logo) {
+          let l = document.querySelector("link[rel~='icon']");
+          if (!l) { l = document.createElement('link'); l.rel = 'icon'; document.head.appendChild(l); }
+          l.href = logo;
+        } else {
+          const l = document.querySelector("link[rel~='icon']");
+          if (l) l.href = 'https://images.emojiterra.com/google/android-11/512px/1f414.png';
+        }
+
+        const msg = document.getElementById('settingsMsg');
+        msg.textContent = 'Saved';
+        setTimeout(() => msg.textContent = '', 2000);
+      }
+
+      function resetSiteSettings() {
+        const DEFAULT_TITLE = 'Frost Chicken';
+        const DEFAULT_FAVICON = 'https://images.emojiterra.com/google/android-11/512px/1f414.png';
+        localStorage.setItem('siteTitle', DEFAULT_TITLE);
+        localStorage.setItem('siteLogo', DEFAULT_FAVICON);
+        document.getElementById('siteTitleInput').value = DEFAULT_TITLE;
+        document.getElementById('siteLogoInput').value = DEFAULT_FAVICON;
+        document.title = DEFAULT_TITLE;
+        const l = document.querySelector("link[rel~='icon']");
+        if (l) l.href = DEFAULT_FAVICON;
+        const msg = document.getElementById('settingsMsg');
+        msg.textContent = 'Reset to defaults';
+        setTimeout(() => msg.textContent = '', 2000);
+      }
+    </script>
 </body>
 </html>

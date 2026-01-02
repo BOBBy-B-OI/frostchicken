@@ -1,4 +1,5 @@
 <link rel="icon" type="image/png" sizes="500x500" href="https://images.emojiterra.com/google/android-11/512px/1f414.png">
+<script src="siteSettings.js"></script>
 <title>Frost Chicken | Games</title>
 <h1>Games</h1>
 <script>
@@ -165,7 +166,6 @@ button {
         <path d="M3 13h2v8h4v-6h4v6h4v-8h2L12 5 3 13z"/>
     </svg>
 </button>
-<button class="about-blank-btn" onclick="openPageInBlankTab()">Open in about:blank</button>
 <script src="snowflake.js"></script>
 <body>
     <script>
@@ -495,28 +495,5 @@ button {
         if (first) {
         document.addEventListener('DOMContentLoaded', generateGames);
         }
-    </script>
-    <script>
-      function openPageInBlankTab() {
-        const siteTitle = localStorage.getItem('siteTitle') || "Frost Chicken";
-        const siteLogo = localStorage.getItem('siteLogo') || "https://images.emojiterra.com/google/android-11/512px/1f414.png";
-        const newTab = window.open('about:blank', '_blank');
-        if (newTab) {
-          newTab.document.title = siteTitle;
-          const favicon = newTab.document.createElement('link');
-          favicon.rel = 'icon';
-          favicon.href = siteLogo;
-          newTab.document.head.appendChild(favicon);
-          const iframe = newTab.document.createElement('iframe');
-          iframe.src = "/games.html";
-          iframe.style.width = '100vw';
-          iframe.style.height = '100vh';
-          iframe.style.border = 'none';
-          newTab.document.body.style.margin = '0';
-          newTab.document.body.appendChild(iframe);
-        } else {
-          alert("Failed to open About:Blank page.");
-        }
-      }
     </script>
 </body>
