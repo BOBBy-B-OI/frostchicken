@@ -1,7 +1,6 @@
 <link rel="icon" type="image/png" sizes="500x500" href="https://images.emojiterra.com/google/android-11/512px/1f414.png">
 <title>Frost Chicken | Games</title>
 <h1>Games</h1>
-<link rel="icon" type="image/png" sizes="500x500" href="https://images.emojiterra.com/google/android-11/512px/1f414.png">
 <script>
     var first = true;
 </script>
@@ -498,12 +497,26 @@ button {
         }
     </script>
     <script>
-        function openPageInBlankTab() {
-            var first = false;
-            var win=window.open("about:blank","_blank");
-            if(!win)return;
-            win.document.write(document.documentElement.outerHTML);
-            win.document.close();
+      function openPageInBlankTab() {
+        const siteTitle = localStorage.getItem('siteTitle') || "Frost Chicken";
+        const siteLogo = localStorage.getItem('siteLogo') || "https://images.emojiterra.com/google/android-11/512px/1f414.png";
+        const newTab = window.open('about:blank', '_blank');
+        if (newTab) {
+          newTab.document.title = siteTitle;
+          const favicon = newTab.document.createElement('link');
+          favicon.rel = 'icon';
+          favicon.href = siteLogo;
+          newTab.document.head.appendChild(favicon);
+          const iframe = newTab.document.createElement('iframe');
+          iframe.src = "/games.html";
+          iframe.style.width = '100vw';
+          iframe.style.height = '100vh';
+          iframe.style.border = 'none';
+          newTab.document.body.style.margin = '0';
+          newTab.document.body.appendChild(iframe);
+        } else {
+          alert("Failed to open About:Blank page.");
         }
+      }
     </script>
 </body>

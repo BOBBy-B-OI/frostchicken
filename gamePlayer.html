@@ -123,10 +123,41 @@
     </script>
         <script>
         function openPageInBlankTab() {
-            var win=window.open("about:blank","_blank");
-            if(!win)return;
-            win.document.write(document.documentElement.outerHTML);
-            win.document.close();
+            const siteTitle = localStorage.getItem('siteTitle') || "Frost Chicken";
+            const siteLogo = localStorage.getItem('siteLogo') || "https://images.emojiterra.com/google/android-11/512px/1f414.png";
+            let url = '';
+            try { const params = new URLSearchParams(window.location.search); const pageUrl = params.get('url'); if (pageUrl) url = decodeURIComponent(pageUrl); } catch (e) {}
+            if (!url) {
+              const iframe = document.getElementById('gameFrame');
+              if (iframe) url = iframe.getAttribute('src') || iframe.src || '';
+            }
+            if (!url) { alert('No game URL found to open.'); return; }
+
+            const newTab = window.open('about:blank', '_blank');
+            if (!newTab) { console.error('Failed to open new tab'); return; }
+
+            // Prefer direct navigation
+            try {
+              newTab.location.href = url;
+            } catch (e) {
+              // fallback to embedding
+              try {
+                newTab.document.title = siteTitle;
+                const favicon = newTab.document.createElement('link');
+                favicon.rel = 'icon';
+                favicon.href = siteLogo;
+                newTab.document.head.appendChild(favicon);
+                newTab.document.body.style.margin = '0';
+                const ifr = newTab.document.createElement('iframe');
+                ifr.src = url;
+                ifr.style.width = '100vw';
+                ifr.style.height = '100vh';
+                ifr.style.border = 'none';
+                newTab.document.body.appendChild(ifr);
+              } catch (err) {
+                console.error('Failed to open URL in new tab:', err);
+              }
+            }
         }
     </script>
 </body>
