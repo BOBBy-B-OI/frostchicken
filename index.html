@@ -29,6 +29,7 @@
 <button class="About" title="About" onclick="location.href='about.html'">ℹ️</button>
 <button class="Partners" title="Partners" onclick="location.href='partners.html'">🤝</button>
 <button class="Settings" title="Settings" onclick="location.href='settings.html'">⚙️</button>
+<button class="Proxy" title="Frosty Proxy" onclick="location.href='proxy.html'">🌀</button>
 
 </div>
 <div class="description" id="description">
@@ -61,9 +62,9 @@
 
       function updateBattery() {
         const percent = Math.round(battery.level * 100);
-        const charging = battery.charging ? "⚡" : "";
+        const charging = battery.charging ? " — ⚡" : "";
 
-        const text = "Battery: " + percent + "% — " + charging;
+        const text = "Battery: " + percent + "%" + charging;
 
         // Store battery text so date/time updater can reuse it
         const display = document.getElementById("battery");
@@ -133,7 +134,7 @@ div.sideBar button {
     text-decoration: none;
     font-size: 20px;
     display: block;
-    margin: 35px 15px;
+    margin: 25px 15px;
     cursor: pointer;
     border-radius: 8px;
     box-shadow: 0 4px #999;

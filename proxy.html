@@ -1,0 +1,107 @@
+<html>
+<head>
+    <link rel="icon" type="image/png" sizes="500x500" href="https://images.emojiterra.com/google/android-11/512px/1f414.png">
+    <script src="siteSettings.js"></script>
+    <title>Frost Chicken | Proxy</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap');
+        body {
+            background-color: #ADD8E6;
+            font-family: "Fredoka", sans-serif;
+            text-align: center;
+            padding-top: 20px;
+            margin: 0;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        div.sideBar {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #cddfe5;
+    opacity: 1;
+    border-radius: 8px;
+    z-index: 500;
+}
+div.sideBar button {
+    background-color: #FFFFFF;
+    border: none;
+    color: #000000;
+    font-family: "Fredoka", sans-serif;
+    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    margin: 25px 15px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px #999;
+    transition: all 0.3s ease;
+}
+div.sideBar button.Proxy {
+    background-color: #a9eee5;
+    padding: 20px 20px;
+}
+
+div.sideBar button:hover {
+    font-size: 50px;
+}
+
+        button {
+            background-color: #FFFFFF;
+            border: none;
+            color: #000000;
+            font-family: "Fredoka", sans-serif;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 12px;
+            box-shadow: 0 4px #999;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #E0E0E0;
+            padding: 25px 40px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sideBar" id="sideBar">
+<button class="Home" title="Home" onclick="location.href='index.html'">🏠</button>
+<button class="Sites" title="Sites" onclick="location.href='sites.html'">🌐</button>
+<button class="Games" title="Games" onclick="location.href='games.html'">🎮</button>
+<button class="About" title="About" onclick="location.href='about.html'">ℹ️</button>
+<button class="Partners" title="Partners" onclick="location.href='partners.html'">🤝</button>
+<button class="Settings" title="Settings" onclick="location.href='settings.html'">⚙️</button>
+<button class="Proxy" title="Frosty Proxy" onclick="location.href='proxy.html'">🌀</button>
+</div>
+    <h1>Frosty Proxy</h1>
+
+    <div style="margin-top:20px; text-align:left; display:inline-block; width:80%; max-width:720px;">
+      <label for="siteInput" style="font-weight:700;display:block;margin-bottom:8px;">Search up site (must include https:// or http://)</label>
+      <input id="siteInput" type="text" placeholder="Example:https://google.com" style="width:100%; padding:8px; border-radius:6px; border:1px solid #ccc;">
+      <div style="height:12px;"></div>
+        <button onclick="openSite()">Open Site</button>
+      </div>
+
+    <script src="snowflake.js"></script>
+
+    <script>
+        function openSite() {
+        const site = document.getElementById('siteInput').value.trim();
+        window.location.href = "/gamePlayer.html?url=" + encodeURIComponent(site);
+      }
+    </script>
+</body>
+</html>
