@@ -37,10 +37,25 @@
 <h2>Enjoy your stay!</h2>
 <h2>❄️🐔</h2>
 </div>
-</div>
 <div class="battery" id="battery">
 
 <script>
+  // Function to update date & time
+  function updateDateTime() {
+    const now = new Date();
+    const date = now.toLocaleDateString();
+    const time = now.toLocaleTimeString();
+
+    // Append date/time to the battery display if battery info already exists
+    const display = document.getElementById("battery");
+    const currentText = display.dataset.batteryText || "";
+    display.innerHTML = currentText + "<br>Date: " + date + "<br>Time: " + time;
+  }
+
+  // Update time every second
+  setInterval(updateDateTime, 1000);
+
+  // Battery API
   if (navigator.getBattery) {
     navigator.getBattery().then(function(battery) {
 
@@ -48,24 +63,32 @@
         const percent = Math.round(battery.level * 100);
         const charging = battery.charging ? "⚡" : "";
 
-        document.getElementById("battery").textContent =
-        charging + percent + "%";
+        const text = "Battery: " + percent + "% — " + charging;
+
+        // Store battery text so date/time updater can reuse it
+        const display = document.getElementById("battery");
+        display.dataset.batteryText = text;
+
+        // Update full display
+        updateDateTime();
       }
 
       // Initial update
       updateBattery();
 
-      // Update when battery level or charging state changes
+      // Update when battery changes
       battery.addEventListener("levelchange", updateBattery);
       battery.addEventListener("chargingchange", updateBattery);
     });
   } else {
-    document.getElementById("battery").textContent =
+    document.getElementById("batteryDisplay").textContent =
       "Battery API not supported on this device.";
   }
 </script>
 
+
 </div>
+
 
 <div class="snow-ground" id="snowGround"></div>
 
@@ -164,7 +187,7 @@ div.battery {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 50px;
+    font-size: 30px;
     font-weight: 600;
     box-shadow: 0 4px #999;
     transition: all 0.3s ease;
