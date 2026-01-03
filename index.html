@@ -38,24 +38,34 @@
 <h2>❄️🐔</h2>
 </div>
 </div>
-<div class="battery" id="battery"></div>
+<div class="battery" id="battery">
+
 <script>
   if (navigator.getBattery) {
     navigator.getBattery().then(function(battery) {
 
       function updateBattery() {
         const percent = Math.round(battery.level * 100);
+        const charging = battery.charging ? "⚡" : "";
+
         document.getElementById("battery").textContent =
-        percent + "%";
+        charging + percent + "%";
       }
+
+      // Initial update
       updateBattery();
+
+      // Update when battery level or charging state changes
       battery.addEventListener("levelchange", updateBattery);
+      battery.addEventListener("chargingchange", updateBattery);
     });
   } else {
-    document.getElementById("batteryDisplay").textContent =
+    document.getElementById("battery").textContent =
       "Battery API not supported on this device.";
   }
 </script>
+
+</div>
 
 <div class="snow-ground" id="snowGround"></div>
 
