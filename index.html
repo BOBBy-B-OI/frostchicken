@@ -41,22 +41,18 @@
 <div class="battery" id="battery">
 
 <script>
-  // Function to update date & time
   function updateDateTime() {
     const now = new Date();
     const date = now.toLocaleDateString();
     const time = now.toLocaleTimeString();
 
-    // Append date/time to the battery display if battery info already exists
     const display = document.getElementById("battery");
     const currentText = display.dataset.batteryText || "";
     display.innerHTML = currentText + "<br>Date: " + date + "<br>Time: " + time;
   }
 
-  // Update time every second
   setInterval(updateDateTime, 1000);
 
-  // Battery API
   if (navigator.getBattery) {
     navigator.getBattery().then(function(battery) {
 
@@ -66,18 +62,14 @@
 
         const text = "Battery: " + percent + "%" + charging;
 
-        // Store battery text so date/time updater can reuse it
         const display = document.getElementById("battery");
         display.dataset.batteryText = text;
 
-        // Update full display
         updateDateTime();
       }
 
-      // Initial update
       updateBattery();
 
-      // Update when battery changes
       battery.addEventListener("levelchange", updateBattery);
       battery.addEventListener("chargingchange", updateBattery);
     });
