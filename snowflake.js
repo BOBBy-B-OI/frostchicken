@@ -129,7 +129,6 @@
     function applyBodySeasonClass(name){
         document.body.classList.remove('fc-season-winter','fc-season-spring','fc-season-summer','fc-season-autumn');
         document.body.classList.add('fc-season-'+name);
-        console.log('Applied class fc-season-'+name, 'Body now has:', document.body.className);
     }
 
     window.FrostChickenSeasons = {

@@ -5,14 +5,15 @@
 <h1>Sites</h1>
 
 <div class="sideBar" id="sideBar">
-<button class="Home" title="Home" onclick="location.href='index.html'">🏠</button>
-<button class="Sites" title="Sites" onclick="location.href='sites.html'">🌐</button>
-<button class="Games" title="Games" onclick="location.href='games.html'">🎮</button>
-<button class="About" title="About" onclick="location.href='about.html'">ℹ️</button>
-<button class="Partners" title="Partners" onclick="location.href='partners.html'">🤝</button>
-<button class="Settings" title="Settings" onclick="location.href='settings.html'">⚙️</button>
-<button class="Proxy" title="Frosty Proxy" onclick="location.href='proxy.html'">🌀</button>
+<button class="Home" title="Home" onclick="location.href='index.html'"><img src="" alt="home" id="home"></button>
+<button class="Sites" title="Sites" onclick="location.href='sites.html'"><img src="" alt="sites" id="sites"></button>
+<button class="Games" title="Games" onclick="location.href='games.html'"><img src="" alt="games" id="game"></button>
+<button class="About" title="About" onclick="location.href='about.html'"><img src="" alt="about" id="about"></button>
+<button class="Partners" title="Partners" onclick="location.href='partners.html'"><img src="" alt="partners" id="partners"></button>
+<button class="Settings" title="Settings" onclick="location.href='settings.html'"><img src="" alt="settings" id="settings"></button>
+<button class="Proxy" title="Frosty Proxy" onclick="location.href='proxy.html'"><img src="" alt="proxy" id="proxy"></button>
 </div>
+<script src="sidebar.js"></script>
 <div style="margin-top:40px; display:flex; flex-wrap:wrap; justify-content:center; gap:50px; max-width:1500px; margin-left:120px;">
 <button onclick="openSite('https://duckmath.org')">Open Duckmath</button>
 <button onclick="openSite('https://selenite.cc/')">Open Selenite</button>
@@ -55,15 +56,32 @@ div.sideBar button {
     border: none;
     color: #000000;
     font-family: "Fredoka", sans-serif;
-    padding: 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+    display: flex;
+    max-width: fit-content;
+    max-height: fit-content;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px #999;
+    transition: all 0.3s ease;
+    margin: 25px 15px;
+}
+
+div.sideBar button img {
+    background-color: #FFFFFF;
+    border: none;
+    color: #000000;
+    font-family: "Fredoka", sans-serif;
+    width:30;
+    height:30;
     text-align: center;
     text-decoration: none;
     font-size: 20px;
     display: block;
-    margin: 25px 15px;
     cursor: pointer;
     border-radius: 8px;
-    box-shadow: 0 4px #999;
     transition: all 0.3s ease;
 }
 div.sideBar button.Sites {

@@ -1,0 +1,14 @@
+    var home="https://www.svgrepo.com/show/535439/home-1.svg";
+    var sites="https://www.svgrepo.com/show/478283/web-page.svg";
+    var game="https://www.svgrepo.com/show/447384/games.svg";
+    var about="https://www.svgrepo.com/show/486514/about-filled.svg";
+    var partners="https://www.svgrepo.com/show/453989/partner.svg";
+    var settings="https://www.svgrepo.com/show/501350/settings-2.svg";
+    var proxy="https://www.svgrepo.com/show/513607/search.svg";
+    document.getElementById('home').src = home;
+    document.getElementById('sites').src = sites;
+    document.getElementById('game').src = game;
+    document.getElementById('about').src = about;
+    document.getElementById('partners').src = partners;
+    document.getElementById('settings').src = settings;
+    document.getElementById('proxy').src = proxy;
