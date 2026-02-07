@@ -4,6 +4,7 @@
             id: 'winter',
             label: 'Winter',
             char: '❄',
+            img: 'https://www.svgrepo.com/show/490217/snowflake.svg',
             freq: 300,
             size: [14, 28],
             duration: [3, 8],
@@ -60,6 +61,8 @@
             transform-origin: center;
         }
         .season-winter { color: #ffffff; }
+        .season-item img { display: block; }
+        .season-winter img { filter: brightness(0) invert(1); }
         .season-spring { color: #ff7fc7; }
         .season-summer { color: #ffd54a; }
         .season-autumn { color: #d97706; }
@@ -105,9 +108,19 @@
     function createItem(cfg){
         const el = document.createElement('div');
         el.className = 'season-item season-'+cfg.id;
-        el.textContent = cfg.char;
         const size = Math.round(rand(cfg.size[0], cfg.size[1]));
-        el.style.fontSize = size+'px';
+        if(cfg.img){
+            const img = document.createElement('img');
+            img.src = cfg.img;
+            img.alt = cfg.id;
+            img.style.width = size + 'px';
+            img.style.height = 'auto';
+            img.style.display = 'block';
+            el.appendChild(img);
+        } else {
+            el.textContent = cfg.char;
+            el.style.fontSize = size+'px';
+        }
         const left = Math.round(Math.random()*window.innerWidth);
         el.style.left = left+'px';
         const duration = rand(cfg.duration[0], cfg.duration[1]);

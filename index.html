@@ -36,7 +36,7 @@
 <h2>Frost Chicken, the best site for all your unblocked needs.</h2>
 <h2>We have many proxies, games, and more!</h2>
 <h2>Enjoy your stay!</h2>
-<h2>❄️🐔</h2>
+<h2><img class="snow" src="https://www.svgrepo.com/show/490217/snowflake.svg" alt="snowflake" style="width:20px;height:20px;vertical-align:middle;margin-right:6px;"> <img src="https://www.svgrepo.com/show/396002/chicken.svg" alt="chicken" style="width:20px;height:20px;vertical-align:middle;"></h2>
 </div>
 <div class="battery" id="battery">
 
@@ -58,7 +58,7 @@
 
       function updateBattery() {
         const percent = Math.round(battery.level * 100);
-        const charging = battery.charging ? " — ⚡" : "";
+        const charging = battery.charging ? ' — <img src="https://www.svgrepo.com/show/502557/charging-battery.svg" alt="charging" style="width:24px;height:24px;vertical-align:middle;">' : "";
 
         const text = "Battery: " + percent + "%" + charging;
 
@@ -425,6 +425,16 @@ body.fc-season-autumn .snow-ground {
     z-index: 10;
 }
 
+.chicken img {
+    width: 48px;
+    height: 48px;
+    display: block;
+}
+
+.description img.snow {
+    filter: brightness(0) invert(1);
+}
+
 @keyframes peck {
     0%, 100% {
         transform: translateY(0);
@@ -523,7 +533,12 @@ function createChickens() {
     for (let i = 0; i < numChickens; i++) {
         const chicken = document.createElement("div");
         chicken.classList.add("chicken");
-        chicken.textContent = "🐔";
+        const img = document.createElement('img');
+        img.src = 'https://www.svgrepo.com/show/396002/chicken.svg';
+        img.alt = 'chicken';
+        img.style.width = '48px';
+        img.style.height = '48px';
+        chicken.appendChild(img);
         const angle = (i / numChickens) * Math.PI * 2;
         const randomX = centerX + Math.cos(angle) * spreadDistance;
         
